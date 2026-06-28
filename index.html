@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>日本インディーゲーム振興メニュー｜落選IP連合</title>
+<title>日本インディーゲーム振興企画｜落選IP連合</title>
 <meta name="description" content="日本のインディーゲームを収録・宣伝する非公式ファンサイト。IP360補助金に不採択となった作品も対象。">
 <style>
   :root{
@@ -168,8 +168,8 @@
 <header class="mast"><div class="wrap">
   <div class="emblem" aria-hidden="true"><span>IP36<span class="hi5">5</span></span></div>
   <div class="org">
-    <div class="ja">日本インディーゲーム振興メニュー</div>
-    <div class="en">PROMOTION MENU FOR JAPANESE INDIE GAMES</div>
+    <div class="ja">日本インディーゲーム振興企画</div>
+    <div class="en">PROMOTION PROJECT FOR JAPANESE INDIE GAMES</div>
   </div>
 </div></header>
 
@@ -177,7 +177,7 @@
   <a href="#">ホーム</a><span class="sep">›</span>
   <a href="#">政策について</a><span class="sep">›</span>
   <a href="#">コンテンツ産業</a><span class="sep">›</span>
-  <span>インディーゲーム振興メニュー</span>
+  <span>インディーゲーム振興企画</span>
 </div></nav>
 
 <div class="tabs"><div class="wrap" role="tablist">
@@ -189,7 +189,7 @@
 
   <!-- ===================== TOP ===================== -->
   <section id="view-top" role="tabpanel" aria-labelledby="tab-top">
-    <h1>日本インディーゲーム振興メニュー</h1>
+    <h1>日本インディーゲーム振興企画</h1>
     <div class="pubinfo">IP365 ‑Toward 20 Trillion Yen（自力で・年中無休）‑</div>
     <p class="lead">日本で作られ、<span class="hl">IP360補助金の交付を受けていない</span>インディーゲームを収録・宣伝します。日本発コンテンツの海外売上を2033年までに<span class="hl">20兆円</span>とする目標に向け、<span class="hl">掛け算</span>で全体の魅力を高めます。<span class="hl">不採択</span>になった作品も、そもそも<span class="hl">申請していない</span>作品も、ここでは等しく一作品です。</p>
 
@@ -233,10 +233,10 @@
     <h1 style="margin-bottom:14px">全作品リスト</h1>
     <div class="filters">
       <div class="frow">
-        <div class="fgrp"><span class="flabel">IP360</span>
+        <div class="fgrp"><span class="flabel">IP360補助金</span>
           <div class="seg" data-filter="ip360">
             <button aria-pressed="true" data-v="all">全部</button>
-            <button aria-pressed="false" data-v="rejected">不採選</button>
+            <button aria-pressed="false" data-v="rejected">不採択</button>
             <button aria-pressed="false" data-v="none">未申請</button>
           </div>
         </div>
@@ -247,11 +247,11 @@
             <button aria-pressed="false" data-v="in_development">開発中</button>
           </div>
         </div>
-        <div class="fgrp"><span class="flabel">AI利用</span>
+        <div class="fgrp"><span class="flabel">生成AIの利用</span>
           <div class="seg" data-filter="ai">
             <button aria-pressed="true" data-v="all">全部</button>
-            <button aria-pressed="false" data-v="yes">使用</button>
             <button aria-pressed="false" data-v="no">不使用</button>
+            <button aria-pressed="false" data-v="yes">使用</button>
           </div>
         </div>
         <div class="fgrp"><span class="flabel">対象年齢</span>
@@ -295,11 +295,11 @@
 <footer><div class="wrap">
   <div class="flinks"><a class="js-form-link" href="#" target="_blank" rel="noopener">掲載申請</a><a href="#" id="calc-link">推定売上の算出方法</a><a class="js-contact-link" href="#" target="_blank" rel="noopener">お問合わせ</a></div>
   <p class="disc">
-    本サイトはIP360補助金の交付決定を受けた作品を掲載対象としません。交付決定者は別途METIの公式チャネルにて発表されます。採択作品の掲載が判明した場合は、随時手動で削除します。<br>
+    本サイトはIP360補助金の交付決定を受けた作品を掲載対象としません。採択作品の掲載が判明した場合は、随時手動で削除します。<br>
     本サイトは独立した有志によるパロディであり、経済産業省、IP360事務局、VIPO、その他いかなる政府機関とも一切関係ありません。サイト名・組織名・ロゴはすべて架空のものです。<br>
     「推定売上」はSteamの公開レビュー数に基づくBoxleiter法による参考推計です。「自己申告」は作者の申告値です。itchは販売データを公開していないため、自己申告の無いitch作品は推定対象外（合計に非計上）です。各ゲームの権利は各権利者に帰属します。
   </p>
-  <p class="copy">© <span id="yr"></span> 落選IP連合 ・ 当サイトは祈りと自力により運営されています。</p>
+  <p class="copy">© <span id="yr"></span> IP365事務局 ・ 当サイトは祈りと自力により運営されています。</p>
 </div></footer>
 
 <script>
@@ -341,7 +341,7 @@
     var idline = g.app_id ? ('App ID: '+esc(g.app_id)) : (g.itch_url?'itch.io':'—');
     var ipnone = g.ip360==="none" ? '<div class="ip-none">IP360：未申請</div>' : '';
     var genreTags=(g.genre||[]).map(function(t){return '<span class="tag g">'+esc(t)+'</span>';}).join("");
-    var aiTag = g.ai_used===true?'<span class="tag ai">AI使用</span>':(g.ai_used===false?'<span class="tag">AI不使用</span>':'');
+    var aiTag = g.ai_used===true?'<span class="tag ai">生成AI使用</span>':(g.ai_used===false?'<span class="tag">生成AI不使用</span>':'');
     var r18Tag = g.adult?'<span class="tag r18">R-18</span>':'';
 
     var ci='<div class="ci"><div class="gname">'+esc(g.name)+'</div>'+
