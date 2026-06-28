@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>掲載申請フォーム｜日本インディーゲーム振興メニュー</title>
+<title>掲載申請フォーム｜日本インディーゲーム振興企画</title>
 <style>
   :root{--navy:#15396b;--navy-d:#0e2949;--ink:#1b1b1b;--sub:#555;--muted:#888;
     --line:#cfcfcf;--line-s:#e4e4e2;--page:#fff;--panel:#f5f5f2;--panel-2:#eef1f5;
@@ -85,7 +85,7 @@
 <div class="util"><div class="wrap"><a href="index.html">← サイトに戻る</a></div></div>
 <header class="mast"><div class="wrap">
   <div class="emblem" aria-hidden="true"><span>IP36<span class="hi5">5</span></span></div>
-  <div class="org"><div class="ja">日本インディーゲーム振興メニュー</div><div class="en">SUBMISSION FORM</div></div>
+  <div class="org"><div class="ja">日本インディーゲーム振興企画</div><div class="en">SUBMISSION FORM</div></div>
 </div></header>
 <nav class="crumb"><div class="wrap"><a href="index.html">ホーム</a><span class="sep">›</span><span>掲載申請</span></div></nav>
 
@@ -148,18 +148,18 @@
         <label class="lab">IP360 申請状況<span class="req">必須</span></label>
         <div class="radios">
           <label><input type="radio" name="ip360" value="none"> 未申請</label>
-          <label><input type="radio" name="ip360" value="rejected"> 不採選</label>
+          <label><input type="radio" name="ip360" value="rejected"> 不採択</label>
         </div>
       </div>
       <div class="field stmt-wrap" id="stmt-wrap">
-        <label class="lab" for="statement">落選感言<span class="opt">不採選の方のみ・任意</span></label>
+        <label class="lab" for="statement">落選感言<span class="opt">不採択の方のみ・任意</span></label>
         <textarea id="statement" maxlength="200" placeholder="落選を糧に。一言どうぞ（200文字以内）"></textarea>
       </div>
       <div class="field">
-        <label class="lab">AI利用<span class="req">必須</span></label>
+        <label class="lab">生成AIの利用<span class="req">必須</span></label>
         <div class="radios">
-          <label><input type="radio" name="ai" value="yes"> 使用</label>
           <label><input type="radio" name="ai" value="no"> 不使用</label>
+          <label><input type="radio" name="ai" value="yes"> 使用</label>
         </div>
       </div>
       <div class="field">
@@ -192,6 +192,25 @@
       </div>
     </fieldset>
 
+    <div class="field">
+      <label class="pledge"><input type="checkbox" id="chk-dev">
+        <span>本作品は私自身（または私のチーム）が<strong>開発したもの</strong>です。代理提出ではありません。</span>
+      </label>
+      <p class="err-msg" id="err-dev">本人による申請のみ受け付けます。</p>
+    </div>
+    <div class="field">
+      <label class="pledge"><input type="checkbox" id="chk-resident">
+        <span>私は<strong>日本で活動するインディーゲーム開発者</strong>です。<br>
+        <small style="color:var(--muted);font-weight:400">対象：日本国籍の個人／特別永住者／永住者その他の長期滞在ビザを有する外国人（観光ビザ不可）／中小企業に該当する日本法人（従業員を搾取するブラック企業＝骸企は不可）。</small></span>
+      </label>
+      <p class="err-msg" id="err-resident">該当する方のみ申請いただけます。</p>
+    </div>
+    <div class="field">
+      <label class="pledge"><input type="checkbox" id="chk-antisocial">
+        <span>私は<strong>暴力団その他の反社会的勢力ではありません</strong>。</span>
+      </label>
+      <p class="err-msg" id="err-antisocial">同意が必要です。</p>
+    </div>
     <div class="field">
       <label class="pledge"><input type="checkbox" id="pledge">
         <span>本作品は IP360補助金（コンテンツ産業成長投資支援事業）の<strong>交付を受けていません</strong>。記載内容に虚偽はありません。</span>
@@ -306,7 +325,7 @@
       genre:selectedGenres(), status:radio("status"), ip360:radio("ip360"),
       statement:val("statement"), ai:radio("ai"), adult:radio("adult"), self_jpy:val("self_jpy"),
       link_web:val("link_web"), link_x:val("link_x"), contact:val("contact"),
-      pledge:$("pledge").checked
+      pledge:$("pledge").checked, dev:$("chk-dev").checked, resident:$("chk-resident").checked, antisocial:$("chk-antisocial").checked
     };
     // validation
     var ok=true, first=null;
@@ -320,6 +339,9 @@
     if(!d.ip360){ok=false;first=first||document.querySelector('input[name=ip360]');}
     if(!d.ai){ok=false;first=first||document.querySelector('input[name=ai]');}
     if(!d.adult){ok=false;first=first||document.querySelector('input[name=adult]');}
+    showErr("err-dev",!d.dev); if(!d.dev){ok=false;first=first||$("chk-dev");}
+    showErr("err-resident",!d.resident); if(!d.resident){ok=false;first=first||$("chk-resident");}
+    showErr("err-antisocial",!d.antisocial); if(!d.antisocial){ok=false;first=first||$("chk-antisocial");}
     showErr("err-pledge",!d.pledge); if(!d.pledge){ok=false;first=first||$("pledge");}
     var st=$("status");
     if(!ok){
