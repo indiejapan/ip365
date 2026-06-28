@@ -1,0 +1,45 @@
+# ============================================================
+#  日本インディーゲーム振興メニュー ・ 掲載作品リスト
+# ============================================================
+#  ■ 現在は応募受付中。第一弾は 2026-07-31 公開予定。
+#  ■ 承認された作品を admin.html で生成し、下の games: に追記します。
+#
+#  必須: app_id と itch_url の「どちらか一方」以上
+#  app_id があれば タイトル/画像/概要/価格/発売日/ジャンルは Steam から自動取得。
+#  itch-only の場合のみ title / image / description / genre を記入。
+#
+#  項目: app_id / itch_url / title / image(460x215) / description(<=300字) /
+#        status(released|in_development) / ip360(none|rejected) /
+#        statement(rejected時のみ) / genre(itch時・最大5) / ai_used(yes|no) /
+#        adult(yes|no・成人向けR-18・既定no) /
+#        self_reported_jpy(任意) / links(website/x/other)
+#
+#  ── itch-only 用 推奨タグ（最大5）──
+#   アクション / アドベンチャー / RPG / シミュレーション / ストラテジー /
+#   パズル / シューティング / 弾幕 / プラットフォーマー / メトロイドヴァニア /
+#   ローグライク / ローグライト / 探索 / ホラー / サバイバル / クラフト /
+#   タワーディフェンス / カードゲーム / デッキ構築 / リズム / ノベル /
+#   ビジュアルノベル / 恋愛 / 美少女 / ドット絵 / 手描き / 2D / 3D /
+#   ローカル協力 / マルチプレイ / 短編 / 雰囲気重視
+# ============================================================
+
+games: []
+
+# ── 記入例（第一弾公開時、上の [] を消してこの形で追記）──
+# games:
+#   - app_id: 3559510
+#     ip360: rejected
+#     statement: "審査に落ちて火がついた。ここから見返す。"
+#     ai_used: no
+#     adult: no
+#   - itch_url: "https://example.itch.io/moss-and-mist"
+#     title: "Moss and Mist"
+#     image: "https://.../header.png"
+#     description: "霧深い森を彷徨う、静かな探索アドベンチャー。"
+#     status: released
+#     ip360: rejected
+#     statement: "落ちた。でも霧の中を歩く人が、少しずつ増えている。"
+#     genre: ["アドベンチャー","探索","雰囲気重視"]
+#     ai_used: no
+#     adult: no
+#     self_reported_jpy: 740000

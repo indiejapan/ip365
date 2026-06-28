@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>掲載申請フォーム｜日本インディーゲーム振興メニュー</title>
+<style>
+  :root{--navy:#15396b;--navy-d:#0e2949;--ink:#1b1b1b;--sub:#555;--muted:#888;
+    --line:#cfcfcf;--line-s:#e4e4e2;--page:#fff;--panel:#f5f5f2;--panel-2:#eef1f5;
+    --stamp:#b3242b;--ok:#1d7a5a;--err:#b3242b;}
+  *{box-sizing:border-box}
+  body{margin:0;color:var(--ink);background:var(--page);
+    font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic Medium","Yu Gothic","Meiryo","MS PGothic",sans-serif;
+    font-size:15px;line-height:1.7}
+  a{color:var(--navy)} .wrap{max-width:760px;margin:0 auto;padding:0 16px}
+  :focus-visible{outline:2px solid var(--navy);outline-offset:2px}
+
+  .util{background:var(--navy-d);color:#dfe6f0;font-size:12px}
+  .util .wrap{display:flex;justify-content:flex-end;align-items:center;height:34px}
+  .util a{color:#dfe6f0;text-decoration:none}
+  .mast{border-bottom:3px solid var(--navy)}
+  .mast .wrap{display:flex;align-items:center;gap:14px;padding:14px 16px}
+  .emblem{width:50px;height:50px;border:2px solid var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .emblem span{font-size:15px;font-weight:700;color:var(--navy)} .emblem .hi5{color:var(--stamp)}
+  .org .ja{font-size:17px;font-weight:700} .org .en{font-size:11px;color:var(--muted);letter-spacing:1px}
+  .crumb{background:var(--panel);border-bottom:1px solid var(--line-s);font-size:12px;color:var(--sub)}
+  .crumb .wrap{padding:7px 16px;display:flex;gap:6px} .crumb a{color:var(--sub);text-decoration:none} .crumb .sep{color:var(--muted)}
+
+  main{padding:26px 0 30px}
+  h1{font-size:22px;font-weight:700;margin:0 0 4px}
+  .pubinfo{display:inline-block;background:var(--navy);color:#fff;font-size:12px;font-weight:700;padding:3px 11px;margin:4px 0 14px}
+  .lead{font-size:13.5px;color:var(--sub);margin:0 0 6px}
+  .rule{font-size:12.5px;color:#333;background:var(--panel);border-left:4px solid var(--navy);padding:9px 12px;margin:0 0 22px}
+
+  fieldset{border:1px solid var(--line);margin:0 0 18px;padding:14px 16px}
+  legend{font-size:13px;font-weight:700;color:var(--navy-d);padding:0 8px}
+  .field{margin:0 0 14px} .field:last-child{margin-bottom:0}
+  label.lab{display:block;font-size:13px;font-weight:700;margin:0 0 4px}
+  .req{color:var(--stamp);font-size:11px;margin-left:4px}
+  .opt{color:var(--muted);font-size:11px;margin-left:4px;font-weight:400}
+  .hint{font-size:11.5px;color:var(--muted);margin:2px 0 0}
+  input[type=text],input[type=url],input[type=email],input[type=number],textarea{
+    width:100%;font:inherit;font-size:14px;border:1px solid var(--line);padding:8px 10px;background:#fff}
+  input:focus,textarea:focus{border-color:var(--navy);outline:none}
+  textarea{resize:vertical;min-height:64px}
+  input:disabled,textarea:disabled{background:var(--panel);color:var(--muted)}
+  .radios{display:flex;gap:16px;flex-wrap:wrap}
+  .radios label{font-size:13.5px;display:flex;align-items:center;gap:5px;cursor:pointer}
+  .counter{font-size:11px;color:var(--muted);text-align:right}
+  .counter.over{color:var(--err);font-weight:700}
+
+  .gtags{display:flex;flex-wrap:wrap;gap:6px}
+  .gtags label{font-size:12px;border:1px solid var(--line);padding:4px 10px;cursor:pointer;background:#fff;user-select:none}
+  .gtags input{display:none}
+  .gtags label.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .gtags label.dis{opacity:.4;cursor:not-allowed}
+  .gcount{font-size:11.5px;color:var(--muted);margin-top:5px}
+
+  .steam-auto{font-size:12px;color:var(--ok);background:#eef8f3;border:1px solid #bfe0d2;padding:7px 10px;margin:0 0 14px;display:none}
+  .steam-auto.show{display:block}
+  .manual{}.manual.hide{display:none}
+  .stmt-wrap{display:none}.stmt-wrap.show{display:block}
+
+  .pledge{display:flex;gap:8px;align-items:flex-start;font-size:13px;background:#fbf0f0;border:1px solid #e2b8ba;padding:11px 13px}
+  .pledge input{margin-top:3px}
+  .err-msg{color:var(--err);font-size:12.5px;margin:6px 0 0;display:none}
+  .err-msg.show{display:block}
+
+  .actions{display:flex;gap:12px;align-items:center;margin-top:6px}
+  button.submit{font:inherit;font-size:15px;font-weight:700;background:var(--navy);color:#fff;border:none;padding:11px 28px;cursor:pointer}
+  button.submit:hover{background:var(--navy-d)} button.submit:disabled{background:var(--muted);cursor:wait}
+  .status{font-size:13px}
+  .status.ok{color:var(--ok);font-weight:700} .status.ng{color:var(--err);font-weight:700}
+
+  .done{display:none;border:1px solid var(--ok);background:#eef8f3;padding:18px 20px;text-align:center}
+  .done.show{display:block} .done h2{font-size:18px;margin:0 0 6px;color:var(--ok)}
+
+  footer{border-top:3px solid var(--navy);margin-top:24px;background:var(--panel)}
+  footer .wrap{padding:16px 16px 24px;font-size:11.5px;color:var(--sub);line-height:1.8}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="util"><div class="wrap"><a href="index.html">← サイトに戻る</a></div></div>
+<header class="mast"><div class="wrap">
+  <div class="emblem" aria-hidden="true"><span>IP36<span class="hi5">5</span></span></div>
+  <div class="org"><div class="ja">日本インディーゲーム振興メニュー</div><div class="en">SUBMISSION FORM</div></div>
+</div></header>
+<nav class="crumb"><div class="wrap"><a href="index.html">ホーム</a><span class="sep">›</span><span>掲載申請</span></div></nav>
+
+<main><div class="wrap">
+  <h1>掲載申請フォーム</h1>
+  <div class="pubinfo">IP365 ‑ 掲載申請受付 ‑</div>
+  <p class="lead">日本のインディーゲームの掲載申請を受け付けます。送信内容は事務局が確認のうえ掲載します。</p>
+  <p class="rule"><strong>掲載条件：</strong>Steam App ID か itch.io のページURLの<strong>どちらか一方以上</strong>。IP360補助金の<strong>交付を受けた作品は対象外</strong>です。</p>
+
+  <form id="form" novalidate>
+    <fieldset>
+      <legend>① 作品ページ（どちらか一方以上 必須）</legend>
+      <div class="field">
+        <label class="lab" for="app_id">Steam App ID<span class="opt">入力すると情報を自動取得</span></label>
+        <input type="text" id="app_id" inputmode="numeric" placeholder="例: 3559510">
+        <p class="hint">ストアURL末尾の数字。例: store.steampowered.com/app/<strong>3559510</strong>/</p>
+      </div>
+      <div class="field">
+        <label class="lab" for="itch_url">itch.io ページURL</label>
+        <input type="url" id="itch_url" placeholder="例: https://yourname.itch.io/yourgame">
+      </div>
+      <p class="err-msg" id="err-page">Steam App ID か itch.io URL の少なくとも一方を入力してください。</p>
+    </fieldset>
+
+    <div class="steam-auto" id="steam-auto">Steam作品として、タイトル・画像・概要・ジャンルは App ID から自動取得されます（下の②は記入不要）。</div>
+
+    <fieldset class="manual" id="manual">
+      <legend>② 作品情報（itch等・Steam以外の場合）</legend>
+      <div class="field">
+        <label class="lab" for="title">タイトル<span class="req">必須</span></label>
+        <input type="text" id="title" placeholder="ゲームタイトル">
+      </div>
+      <div class="field">
+        <label class="lab" for="image">画像URL<span class="req">必須</span></label>
+        <input type="url" id="image" placeholder="https://.../header.png">
+        <p class="hint">460×215px（Steamヘッダー規格）。画像はどこかにアップロードしてURLを御記入ください。</p>
+      </div>
+      <div class="field">
+        <label class="lab" for="description">概要<span class="req">必須</span></label>
+        <textarea id="description" maxlength="300" placeholder="作品の短い紹介（300文字以内）"></textarea>
+        <div class="counter" id="desc-count">0 / 300</div>
+      </div>
+      <div class="field">
+        <label class="lab">ジャンル<span class="opt">最大5つまで</span></label>
+        <div class="gtags" id="gtags"></div>
+        <div class="gcount" id="gcount">0 / 5 選択中</div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>③ 区分</legend>
+      <div class="field">
+        <label class="lab">状態<span class="req">必須</span></label>
+        <div class="radios">
+          <label><input type="radio" name="status" value="released"> 発売済</label>
+          <label><input type="radio" name="status" value="in_development"> 開発中</label>
+        </div>
+      </div>
+      <div class="field">
+        <label class="lab">IP360 申請状況<span class="req">必須</span></label>
+        <div class="radios">
+          <label><input type="radio" name="ip360" value="none"> 未申請</label>
+          <label><input type="radio" name="ip360" value="rejected"> 不採選</label>
+        </div>
+      </div>
+      <div class="field stmt-wrap" id="stmt-wrap">
+        <label class="lab" for="statement">落選感言<span class="opt">不採選の方のみ・任意</span></label>
+        <textarea id="statement" maxlength="200" placeholder="落選を糧に。一言どうぞ（200文字以内）"></textarea>
+      </div>
+      <div class="field">
+        <label class="lab">AI利用<span class="req">必須</span></label>
+        <div class="radios">
+          <label><input type="radio" name="ai" value="yes"> 使用</label>
+          <label><input type="radio" name="ai" value="no"> 不使用</label>
+        </div>
+      </div>
+      <div class="field">
+        <label class="lab">対象年齢<span class="req">必須</span></label>
+        <div class="radios">
+          <label><input type="radio" name="adult" value="no"> 全年齢</label>
+          <label><input type="radio" name="adult" value="yes"> 成人向け（R-18）</label>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>④ 任意項目</legend>
+      <div class="field">
+        <label class="lab" for="self_jpy">自己申告売上（円）<span class="opt">itch等・任意</span></label>
+        <input type="number" id="self_jpy" min="0" step="1" placeholder="例: 740000">
+        <p class="hint">入力すると「自己申告」として合計に計上されます（Steam作品は推定値を使うため不要）。</p>
+      </div>
+      <div class="field">
+        <label class="lab" for="link_web">公式サイト<span class="opt">任意</span></label>
+        <input type="url" id="link_web" placeholder="https://...">
+      </div>
+      <div class="field">
+        <label class="lab" for="link_x">X<span class="opt">任意</span></label>
+        <input type="url" id="link_x" placeholder="https://x.com/...">
+      </div>
+      <div class="field">
+        <label class="lab" for="contact">連絡先メール<span class="opt">任意・確認連絡用</span></label>
+        <input type="email" id="contact" placeholder="you@example.com">
+      </div>
+    </fieldset>
+
+    <div class="field">
+      <label class="pledge"><input type="checkbox" id="pledge">
+        <span>本作品は IP360補助金（コンテンツ産業成長投資支援事業）の<strong>交付を受けていません</strong>。記載内容に虚偽はありません。</span>
+      </label>
+      <p class="err-msg" id="err-pledge">掲載には誓約への同意が必要です。</p>
+    </div>
+
+    <div class="actions">
+      <button type="submit" class="submit" id="submit">申請を送信</button>
+      <span class="status" id="status"></span>
+    </div>
+  </form>
+
+  <div class="done" id="done">
+    <h2>申請を受け付けました</h2>
+    <p style="margin:0 0 4px">事務局が確認のうえ掲載します。ありがとうございました。</p>
+    <p style="margin:0"><a href="index.html">← サイトに戻る</a></p>
+  </div>
+</div></main>
+
+<footer><div class="wrap">
+  本サイトは独立した有志によるパロディであり、経済産業省・IP360事務局・VIPO等とは一切関係ありません。<br>
+  IP360補助金の交付決定を受けた作品は掲載対象外です。判明した場合は手動で削除します。
+</div></footer>
+
+<script>
+(function(){
+  "use strict";
+  // ▼▼▼ ここに Web3Forms の access key を入れてください（https://web3forms.com で無料取得） ▼▼▼
+  var ACCESS_KEY = "YOUR-WEB3FORMS-ACCESS-KEY";
+  // ▲▲▲ FormSubmit/Formspreeに変える場合は下の submit() のURLとフィールド名を差し替え ▲▲▲
+
+  var GENRES=["アクション","アドベンチャー","RPG","シミュレーション","ストラテジー","パズル","シューティング","弾幕","プラットフォーマー","メトロイドヴァニア","ローグライク","ローグライト","探索","ホラー","サバイバル","クラフト","タワーディフェンス","カードゲーム","デッキ構築","リズム","ノベル","ビジュアルノベル","恋愛","美少女","ドット絵","手描き","2D","3D","ローカル協力","マルチプレイ","短編","雰囲気重視"];
+  var MAXG=5;
+  var $=function(id){return document.getElementById(id);};
+  var val=function(id){return ($(id).value||"").trim();};
+  var radio=function(n){var e=document.querySelector('input[name="'+n+'"]:checked');return e?e.value:"";};
+
+  // genre chips
+  var box=$("gtags");
+  GENRES.forEach(function(g){
+    var lab=document.createElement("label");
+    lab.innerHTML='<input type="checkbox" value="'+g+'"> '+g;
+    box.appendChild(lab);
+  });
+  function selectedGenres(){return [].slice.call(box.querySelectorAll("input:checked")).map(function(i){return i.value;});}
+  function syncGenres(){
+    var n=selectedGenres().length;
+    $("gcount").textContent=n+" / "+MAXG+" 選択中";
+    box.querySelectorAll("label").forEach(function(l){
+      var inp=l.querySelector("input");
+      l.classList.toggle("on",inp.checked);
+      l.classList.toggle("dis",!inp.checked && n>=MAXG);
+      inp.disabled=!inp.checked && n>=MAXG;
+    });
+  }
+  box.addEventListener("change",syncGenres);
+
+  // description counter
+  $("description").addEventListener("input",function(){
+    var n=this.value.length;$("desc-count").textContent=n+" / 300";
+    $("desc-count").classList.toggle("over",n>300);
+  });
+
+  // app_id toggles manual section
+  function syncMode(){
+    var hasApp=val("app_id")!=="";
+    $("manual").classList.toggle("hide",hasApp);
+    $("steam-auto").classList.toggle("show",hasApp);
+  }
+  $("app_id").addEventListener("input",syncMode);
+
+  // ip360 toggles statement
+  document.querySelectorAll('input[name="ip360"]').forEach(function(r){
+    r.addEventListener("change",function(){
+      $("stmt-wrap").classList.toggle("show",radio("ip360")==="rejected");
+    });
+  });
+
+  function showErr(id,on){$(id).classList.toggle("show",on);}
+  function q(s){return '"'+String(s).replace(/\\/g,"\\\\").replace(/"/g,'\\"').replace(/[\r\n]+/g," ").trim()+'"';}
+
+  function buildYaml(d){
+    var L=["  - "];
+    var lines=[];
+    if(d.app_id) lines.push("app_id: "+d.app_id);
+    if(d.itch_url) lines.push("itch_url: "+q(d.itch_url));
+    if(!d.app_id){
+      lines.push("title: "+q(d.title));
+      lines.push("image: "+q(d.image));
+      lines.push("description: "+q(d.description));
+    }
+    lines.push("status: "+d.status);
+    lines.push("ip360: "+d.ip360);
+    if(d.ip360==="rejected"&&d.statement) lines.push("statement: "+q(d.statement));
+    if(!d.app_id&&d.genre.length) lines.push("genre: ["+d.genre.map(q).join(", ")+"]");
+    lines.push("ai_used: "+(d.ai==="yes"?"yes":"no"));
+    if(d.adult==="yes") lines.push("adult: yes");
+    if(d.self_jpy) lines.push("self_reported_jpy: "+d.self_jpy);
+    var lk=[];
+    if(d.link_web) lk.push("website: "+q(d.link_web));
+    if(d.link_x) lk.push("x: "+q(d.link_x));
+    if(lk.length) lines.push("links: { "+lk.join(", ")+" }");
+    return "  - "+lines.join("\n    ");
+  }
+
+  $("form").addEventListener("submit",function(ev){
+    ev.preventDefault();
+    var d={
+      app_id:val("app_id"), itch_url:val("itch_url"),
+      title:val("title"), image:val("image"), description:val("description"),
+      genre:selectedGenres(), status:radio("status"), ip360:radio("ip360"),
+      statement:val("statement"), ai:radio("ai"), adult:radio("adult"), self_jpy:val("self_jpy"),
+      link_web:val("link_web"), link_x:val("link_x"), contact:val("contact"),
+      pledge:$("pledge").checked
+    };
+    // validation
+    var ok=true, first=null;
+    var needPage = !d.app_id && !d.itch_url; showErr("err-page",needPage); if(needPage){ok=false;first=first||$("app_id");}
+    if(!d.app_id){
+      if(!d.title||!d.image||!d.description){ok=false;first=first||$("title");}
+    }
+    if(d.description.length>300){ok=false;first=first||$("description");}
+    if(d.genre.length>MAXG){ok=false;}
+    if(!d.status){ok=false;first=first||document.querySelector('input[name=status]');}
+    if(!d.ip360){ok=false;first=first||document.querySelector('input[name=ip360]');}
+    if(!d.ai){ok=false;first=first||document.querySelector('input[name=ai]');}
+    if(!d.adult){ok=false;first=first||document.querySelector('input[name=adult]');}
+    showErr("err-pledge",!d.pledge); if(!d.pledge){ok=false;first=first||$("pledge");}
+    var st=$("status");
+    if(!ok){
+      st.textContent="未入力・不備の項目があります。";st.className="status ng";
+      if(first&&first.focus)first.focus();
+      return;
+    }
+
+    var yaml=buildYaml(d);
+    var payload={
+      access_key:ACCESS_KEY,
+      subject:"【IP365 掲載申請】"+(d.app_id?("App "+d.app_id):(d.title||d.itch_url)),
+      from_name:"IP365 掲載申請フォーム",
+      // 人間が読む用
+      作品:(d.title||("App "+d.app_id)||d.itch_url),
+      app_id:d.app_id, itch_url:d.itch_url, status:d.status, ip360:d.ip360,
+      ai_used:d.ai, adult:d.adult, self_reported_jpy:d.self_jpy, genre:d.genre.join(" / "),
+      statement:d.statement, links:[d.link_web,d.link_x].filter(Boolean).join(" "),
+      連絡先:d.contact,
+      // そのまま games.yaml に貼れるブロック
+      yaml_block:yaml,
+      botcheck:""
+    };
+
+    $("submit").disabled=true; st.textContent="送信中…";st.className="status";
+    if(ACCESS_KEY==="YOUR-WEB3FORMS-ACCESS-KEY"){
+      // キー未設定: ローカル確認用にYAMLを表示
+      $("submit").disabled=false;
+      st.textContent="";
+      alert("【ACCESS_KEY 未設定】\n\nWeb3Forms の access key を submit.html に設定すると、この内容がメール送信されます。\n\n--- 生成された games.yaml ブロック ---\n\n"+yaml);
+      return;
+    }
+    fetch("https://api.web3forms.com/submit",{
+      method:"POST",
+      headers:{"Content-Type":"application/json",Accept:"application/json"},
+      body:JSON.stringify(payload)
+    }).then(function(r){return r.json();}).then(function(res){
+      if(res.success){ $("form").style.display="none"; $("done").classList.add("show"); window.scrollTo(0,0); }
+      else { throw new Error(res.message||"送信に失敗しました"); }
+    }).catch(function(e){
+      $("submit").disabled=false;
+      st.textContent="送信に失敗しました。時間をおいて再度お試しください。";st.className="status ng";
+    });
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>日本インディーゲーム振興メニュー｜落選IP連合</title>
+<meta name="description" content="日本のインディーゲームを収録・宣伝する非公式ファンサイト。IP360補助金に不採択となった作品も対象。">
+<style>
+  :root{
+    --navy:#15396b; --navy-d:#0e2949; --ink:#1b1b1b; --sub:#555; --muted:#888;
+    --line:#cfcfcf; --line-s:#e4e4e2; --page:#fff; --panel:#f5f5f2; --panel-2:#eef1f5;
+    --stamp:#b3242b; --ok:#1d7a5a; --amber:#9a6a12;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;color:var(--ink);background:var(--page);
+    font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic Medium","Yu Gothic","Meiryo","MS PGothic",sans-serif;
+    font-size:15px;line-height:1.7;}
+  a{color:var(--navy);text-decoration:underline;text-underline-offset:2px}
+  a:hover{color:#1f57a3}
+  :focus-visible{outline:2px solid var(--navy);outline-offset:2px}
+  .wrap{max-width:980px;margin:0 auto;padding:0 16px}
+
+  .util{background:var(--navy-d);color:#dfe6f0;font-size:12px}
+  .util .wrap{display:flex;justify-content:flex-end;align-items:center;gap:16px;height:34px}
+  .util a{color:#dfe6f0;text-decoration:none}.util a:hover{text-decoration:underline}
+  .util .sz{display:flex;gap:6px;align-items:center}
+  .util .sz button{background:none;border:1px solid #3a557d;color:#dfe6f0;font:inherit;font-size:11px;padding:1px 7px;cursor:pointer}
+  .util .sz button[aria-pressed="true"]{background:#dfe6f0;color:var(--navy-d)}
+
+  .mast{border-bottom:3px solid var(--navy)}
+  .mast .wrap{display:flex;align-items:center;gap:14px;padding:14px 16px}
+  .emblem{width:52px;height:52px;border:2px solid var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .emblem span{font-size:15px;font-weight:700;color:var(--navy);letter-spacing:-.5px}
+  .emblem .x{color:var(--stamp);text-decoration:line-through;text-decoration-thickness:2px}
+  .emblem .hi5{color:var(--stamp)}
+  .org .ja{font-size:18px;font-weight:700;letter-spacing:.5px;line-height:1.3}
+  .org .en{font-size:11px;color:var(--muted);letter-spacing:1px}
+
+  .crumb{background:var(--panel);border-bottom:1px solid var(--line-s);font-size:12px;color:var(--sub)}
+  .crumb .wrap{padding:7px 16px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+  .crumb a{color:var(--sub);text-decoration:none}.crumb .sep{color:var(--muted)}
+
+  .tabs{background:var(--panel-2);border-bottom:2px solid var(--navy)}
+  .tabs .wrap{display:flex;gap:2px;padding:0 16px}
+  .tab{background:var(--panel);border:1px solid var(--line-s);border-bottom:none;font:inherit;font-size:14px;font-weight:700;
+    color:var(--sub);padding:9px 20px;cursor:pointer;margin-top:6px}
+  .tab[aria-selected="true"]{background:var(--navy);color:#fff;border-color:var(--navy)}
+
+  main{padding:24px 0 8px}
+  h1{font-size:23px;font-weight:700;line-height:1.4;margin:0 0 4px}
+  .pubinfo{display:inline-block;background:var(--navy);color:#fff;font-size:12px;font-weight:700;padding:3px 11px;margin:4px 0 14px;letter-spacing:.5px}
+  .lead{font-size:14px;color:#2b2b2b;margin:0 0 18px;max-width:760px}
+  .lead .hl{color:var(--navy);font-weight:700}
+
+  .panel{border:1px solid var(--line);background:#fff;margin:0 0 26px}
+  .panel .hd{background:var(--navy);color:#fff;font-size:13px;font-weight:700;padding:7px 14px;letter-spacing:.5px}
+  .panel .bd{padding:15px 18px}
+  .prow{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:6px}
+  .prow .label{font-size:12.5px;color:var(--sub)} .target{font-size:12px;color:var(--muted)}
+  .total{font-size:29px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1}
+  .bar{height:14px;background:var(--panel);border:1px solid var(--line);overflow:hidden;margin-top:8px}
+  .camp-note{font-size:13px;color:#2b2b2b;margin:0 0 4px;line-height:1.7}
+  .camp .camp-fill{background:var(--navy)}
+  .cta{display:inline-block;background:var(--navy);color:#fff;font-size:13px;font-weight:700;padding:8px 18px;text-decoration:none}
+  .cta:hover{background:var(--navy-d);color:#fff}
+  .ph-card{border:1px dashed var(--line);background:var(--panel);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;aspect-ratio:460/240;color:var(--muted);font-size:12.5px;padding:14px;gap:8px}
+  .ph-card a{font-size:12px}
+  .prelaunch{border:1px solid var(--line);background:var(--panel);padding:24px 20px;text-align:center;font-size:14px;color:var(--sub)}
+  .prelaunch strong{color:var(--navy-d)}
+  .tag.r18{border-color:#d88;color:#fff;background:var(--stamp);font-weight:700}
+  .modal-ov{position:fixed;inset:0;background:rgba(14,41,73,.55);display:none;align-items:center;justify-content:center;z-index:50;padding:18px}
+  .modal-ov.show{display:flex}
+  .modal{background:#fff;border:1px solid var(--line);max-width:380px;width:100%;box-shadow:0 8px 30px rgba(0,0,0,.25)}
+  .modal-h{background:var(--stamp);color:#fff;font-size:14px;font-weight:700;padding:9px 16px;letter-spacing:1px}
+  .modal-b{padding:18px 18px 16px;font-size:14px}
+  .modal-b p{margin:0 0 10px}
+  .modal-acts{display:flex;gap:10px;margin-top:16px}
+  .modal-acts button{font:inherit;font-size:14px;font-weight:700;border:1px solid;padding:10px 16px;cursor:pointer;flex:1}
+  .m-yes{background:var(--navy);color:#fff;border-color:var(--navy)} .m-yes:hover{background:var(--navy-d)}
+  .m-no{background:#fff;color:var(--sub);border-color:var(--line)} .m-no:hover{background:var(--panel)}
+  .bar>i{display:block;height:100%;background:var(--ok);min-width:3px;transition:width .9s ease}
+  .scale{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:4px;font-variant-numeric:tabular-nums}
+  .pmeta{margin-top:12px;border-top:1px solid var(--line-s);padding-top:10px;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line-s)}
+  .pmeta div{background:#fff;padding:8px 10px}.pmeta .k{font-size:11px;color:var(--muted)}.pmeta .v{font-size:15px;font-weight:700;font-variant-numeric:tabular-nums}
+
+  .sec-h{font-size:17px;font-weight:700;border-left:6px solid var(--navy);padding:2px 0 2px 11px;margin:22px 0 4px;display:flex;justify-content:space-between;align-items:center}
+  .sec-h .reshuf{font-size:12px;font-weight:400}
+  .sec-sub{font-size:12.5px;color:var(--sub);margin:0 0 14px}
+  .reshuf-btn{font:inherit;font-size:12px;background:var(--panel);border:1px solid var(--line);padding:4px 12px;cursor:pointer;color:var(--navy)}
+  .reshuf-btn:hover{background:var(--panel-2)}
+
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:8px}
+  .col-h{font-size:13px;font-weight:700;color:var(--navy-d);background:var(--panel);border:1px solid var(--line-s);border-bottom:2px solid var(--navy);padding:6px 12px;margin-bottom:12px}
+  .col-h .cnt{float:right;color:var(--muted);font-weight:400}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+  .card{border:1px solid var(--line);background:#fff;display:flex;flex-direction:column}
+  .thumb{aspect-ratio:460/215;background:var(--panel-2);position:relative;overflow:hidden;border-bottom:1px solid var(--line-s)}
+  .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+  .thumb .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#9aa6b4;font-size:11px;text-align:center;padding:10px}
+  .stamp{position:absolute;top:8px;left:8px;border:2.5px solid var(--stamp);color:var(--stamp);font-size:12px;font-weight:700;letter-spacing:3px;padding:2px 6px 2px 9px;transform:rotate(-9deg);background:rgba(255,255,255,.55)}
+  .pin-status{position:absolute;top:8px;right:8px;font-size:10px;font-weight:700;padding:2px 8px;background:rgba(255,255,255,.85)}
+  .pin-status.dev{color:var(--amber);border:1px solid #d8b25a}.pin-status.rel{color:var(--ok);border:1px solid #a6d2bf}
+  .ci{padding:11px 13px;display:flex;flex-direction:column;gap:7px;flex:1}
+  .gname{font-size:15px;font-weight:700;line-height:1.35}
+  .meta-line{font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
+  .ip-none{font-size:11px;color:#aaa}
+  .tags{display:flex;flex-wrap:wrap;gap:5px}
+  .tag{font-size:10.5px;padding:2px 8px;border:1px solid var(--line);color:var(--sub);background:var(--panel);white-space:nowrap}
+  .tag.g{background:var(--panel-2);color:var(--navy-d);border-color:#cdd8e6}
+  .tag.ai{border-color:#cdbce6;color:#5a3f8a;background:#f3eefa}
+  .rev{margin-top:auto;padding-top:8px;border-top:1px solid var(--line-s);font-size:12px;font-variant-numeric:tabular-nums;display:flex;justify-content:space-between;align-items:baseline}
+  .rev .k{font-size:10.5px;color:var(--muted)}
+  .rev .v.est{color:var(--ok);font-weight:700}.rev .v.self{color:var(--navy);font-weight:700}.rev .v.exc{color:var(--muted)}
+  .acc-btn{width:100%;text-align:left;background:var(--panel);border:none;border-top:1px solid var(--line-s);font:inherit;font-size:12px;font-weight:700;color:var(--navy);padding:7px 13px;cursor:pointer}
+  .acc-btn .tri{font-size:9px;display:inline-block;transition:transform .2s}.acc-btn[aria-expanded="true"] .tri{transform:rotate(90deg)}
+  .acc-bd{display:none;padding:12px 13px;font-size:12.5px;border-top:1px solid var(--line-s)}.acc-bd.open{display:block}
+  .acc-bd h4{font-size:12px;font-weight:700;margin:0 0 3px;color:var(--navy-d)}.acc-bd .blk{margin:0 0 11px}
+  .acc-bd .statement{background:#fbf0f0;border-left:3px solid var(--stamp);padding:8px 11px;margin:0;color:#3a2020}
+  .links{display:flex;flex-wrap:wrap;gap:6px;margin:0}
+  .links a{font-size:11.5px;padding:3px 10px;border:1px solid var(--line);text-decoration:none;color:var(--navy);background:#fff}.links a:hover{background:var(--panel)}
+  .calc{font-size:11px;color:var(--muted);line-height:1.6;margin:0}
+
+  .filters{border:1px solid var(--line);background:var(--panel);padding:13px 16px;margin:0 0 16px}
+  .frow{display:flex;flex-wrap:wrap;gap:18px;align-items:flex-start}
+  .fgrp{display:flex;flex-direction:column;gap:5px}
+  .fgrp .flabel{font-size:11px;font-weight:700;color:var(--navy-d)}
+  .seg{display:flex;border:1px solid var(--line)}
+  .seg button{font:inherit;font-size:12px;background:#fff;border:none;border-right:1px solid var(--line);padding:5px 12px;cursor:pointer;color:var(--sub)}
+  .seg button:last-child{border-right:none}
+  .seg button[aria-pressed="true"]{background:var(--navy);color:#fff}
+  .gchips{display:flex;flex-wrap:wrap;gap:5px;max-width:560px}
+  .gchip{font:inherit;font-size:11.5px;background:#fff;border:1px solid var(--line);padding:3px 10px;cursor:pointer;color:var(--sub)}
+  .gchip[aria-pressed="true"]{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .fcount{font-size:12px;color:var(--sub);margin:0 0 12px}
+  .fcount b{color:var(--ink)}
+  .empty{text-align:center;color:var(--muted);font-size:13px;padding:30px}
+
+  .apply{border:1px dashed var(--line);background:var(--panel);padding:15px 18px;margin:22px 0 8px;font-size:13px}
+  .apply h3{font-size:14px;margin:0 0 6px;font-weight:700}
+
+  footer{border-top:3px solid var(--navy);margin-top:28px;background:var(--panel)}
+  footer .wrap{padding:18px 16px 26px}
+  .flinks{display:flex;flex-wrap:wrap;gap:14px;font-size:12.5px;margin-bottom:12px}
+  .disc{font-size:11.5px;color:var(--sub);line-height:1.8;border-top:1px solid var(--line-s);padding-top:12px;margin:0}
+  .copy{font-size:11px;color:var(--muted);margin-top:10px}
+
+  .hide{display:none!important}
+  @media(max-width:760px){
+    .two-col{grid-template-columns:1fr}
+    .pmeta{grid-template-columns:1fr 1fr}
+  }
+  @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+  body.lg{font-size:17px}
+</style>
+</head>
+<body>
+
+<div class="util"><div class="wrap">
+  <span class="sz">文字サイズ
+    <button id="sz-n" aria-pressed="true">標準</button>
+    <button id="sz-l" aria-pressed="false">拡大</button>
+  </span>
+  <a href="#">サイトマップ</a>
+</div></div>
+
+<header class="mast"><div class="wrap">
+  <div class="emblem" aria-hidden="true"><span>IP36<span class="hi5">5</span></span></div>
+  <div class="org">
+    <div class="ja">日本インディーゲーム振興メニュー</div>
+    <div class="en">PROMOTION MENU FOR JAPANESE INDIE GAMES</div>
+  </div>
+</div></header>
+
+<nav class="crumb" aria-label="パンくず"><div class="wrap">
+  <a href="#">ホーム</a><span class="sep">›</span>
+  <a href="#">政策について</a><span class="sep">›</span>
+  <a href="#">コンテンツ産業</a><span class="sep">›</span>
+  <span>インディーゲーム振興メニュー</span>
+</div></nav>
+
+<div class="tabs"><div class="wrap" role="tablist">
+  <button class="tab" id="tab-top" role="tab" aria-selected="true" aria-controls="view-top">トップ</button>
+  <button class="tab" id="tab-list" role="tab" aria-selected="false" aria-controls="view-list">全作品リスト</button>
+</div></div>
+
+<main><div class="wrap">
+
+  <!-- ===================== TOP ===================== -->
+  <section id="view-top" role="tabpanel" aria-labelledby="tab-top">
+    <h1>日本インディーゲーム振興メニュー</h1>
+    <div class="pubinfo">IP365 ‑Toward 20 Trillion Yen（自力で・年中無休）‑</div>
+    <p class="lead">日本で作られ、<span class="hl">IP360補助金の交付を受けていない</span>インディーゲームを収録・宣伝します。日本発コンテンツの海外売上を2033年までに<span class="hl">20兆円</span>とする目標に向け、<span class="hl">掛け算</span>で全体の魅力を高めます。<span class="hl">不採択</span>になった作品も、そもそも<span class="hl">申請していない</span>作品も、ここでは等しく一作品です。</p>
+
+    <section class="panel camp" aria-labelledby="camp-h">
+      <div class="hd" id="camp-h">企画進捗状況 ・ 応募受付中</div>
+      <div class="bd">
+        <p class="camp-note">現在、IP360補助金の<strong>「不採択」</strong>および<strong>「未申請」</strong>のインディーゲームを応募受付中です。第一弾の掲載作品は <strong>2026年7月31日</strong> に公開予定。以降、掲載作品は毎月手動で、売上データは毎週自動で更新します。奮って御応募ください。</p>
+        <div class="prow" style="margin-top:6px"><span class="label">応募受付 → 第一弾公開</span><span class="target" id="camp-countdown">あと — 日</span></div>
+        <div class="bar"><i id="camp-bar" class="camp-fill" style="width:3px"></i></div>
+        <div class="scale"><span id="camp-start">応募開始</span><span>第一弾公開 2026/7/31</span></div>
+        <p style="margin:13px 0 0"><a class="cta js-form-link" href="#" target="_blank" rel="noopener">→ 掲載申請フォームへ</a></p>
+      </div>
+    </section>
+
+    <section class="panel" aria-labelledby="prog-h">
+      <div class="hd" id="prog-h">政策目標進捗状況</div>
+      <div class="bd">
+        <div class="prow"><span class="label">掲載作品 合計売上（推定＋自己申告）</span><span class="target">目標：20兆円</span></div>
+        <div class="prow" style="margin:4px 0 0"><span class="total" id="total-jpy">¥—</span><span class="target" id="target-jpy">/ ¥20,000,000,000,000</span></div>
+        <div class="bar"><i id="bar" style="width:3px"></i></div>
+        <div class="scale"><span>0円</span><span id="pct">進捗 —</span><span>20兆円</span></div>
+        <div class="pmeta">
+          <div><div class="k">掲載作品数</div><div class="v" id="m-count">—</div></div>
+          <div><div class="k">Steam推定 合計</div><div class="v" id="m-est">—</div></div>
+          <div><div class="k">自己申告 合計</div><div class="v" id="m-self">—</div></div>
+          <div><div class="k">最終更新日</div><div class="v" id="m-updated" style="font-size:12px">—</div></div>
+        </div>
+      </div>
+    </section>
+
+    <h2 class="sec-h">ピックアップ <button class="reshuf-btn" id="reshuf" type="button">↻ 入れ替える</button></h2>
+    <p class="sec-sub">発売済・開発中それぞれからランダムに紹介します。</p>
+    <div class="two-col">
+      <div><div class="col-h">発売済 <span class="cnt" id="rel-cnt"></span></div><div class="grid" id="show-rel"></div></div>
+      <div><div class="col-h">開発中 <span class="cnt" id="dev-cnt"></span></div><div class="grid" id="show-dev"></div></div>
+    </div>
+  </section>
+
+  <!-- ===================== LIST ===================== -->
+  <section id="view-list" role="tabpanel" aria-labelledby="tab-list" class="hide">
+    <h1 style="margin-bottom:14px">全作品リスト</h1>
+    <div class="filters">
+      <div class="frow">
+        <div class="fgrp"><span class="flabel">IP360</span>
+          <div class="seg" data-filter="ip360">
+            <button aria-pressed="true" data-v="all">全部</button>
+            <button aria-pressed="false" data-v="rejected">不採選</button>
+            <button aria-pressed="false" data-v="none">未申請</button>
+          </div>
+        </div>
+        <div class="fgrp"><span class="flabel">状態</span>
+          <div class="seg" data-filter="status">
+            <button aria-pressed="true" data-v="all">全部</button>
+            <button aria-pressed="false" data-v="released">発売済</button>
+            <button aria-pressed="false" data-v="in_development">開発中</button>
+          </div>
+        </div>
+        <div class="fgrp"><span class="flabel">AI利用</span>
+          <div class="seg" data-filter="ai">
+            <button aria-pressed="true" data-v="all">全部</button>
+            <button aria-pressed="false" data-v="yes">使用</button>
+            <button aria-pressed="false" data-v="no">不使用</button>
+          </div>
+        </div>
+        <div class="fgrp"><span class="flabel">対象年齢</span>
+          <div class="seg" data-filter="adult">
+            <button aria-pressed="true" data-v="sfw">全年齢のみ</button>
+            <button aria-pressed="false" data-v="all">成人向けも表示</button>
+          </div>
+        </div>
+      </div>
+      <div class="fgrp" style="margin-top:13px"><span class="flabel">ジャンル（複数選択可）</span>
+        <div class="gchips" id="gchips"></div>
+      </div>
+    </div>
+    <p class="fcount"><b id="list-count">0</b> 件を表示中</p>
+    <div class="grid" id="list-grid"></div>
+    <div class="empty hide" id="list-empty">条件に一致する作品がありません。</div>
+
+    <section class="apply">
+      <h3>掲載申請について</h3>
+      <p style="margin:0">Steam App ID か itch.io のページURL、<strong>どちらか一方</strong>があれば掲載できます。Steam作品はタイトル・画像・概要・ジャンルを自動取得。itch作品は460×215pxの画像・概要（300文字以内）・ジャンル（最大5つ）を御記入ください。</p>
+      <p style="margin:10px 0 0"><a class="js-form-link" href="#" target="_blank" rel="noopener" style="display:inline-block;background:var(--navy);color:#fff;font-size:13px;font-weight:700;padding:8px 18px;text-decoration:none">→ 掲載申請フォームへ</a></p>
+    </section>
+  </section>
+
+</div></main>
+
+<div class="modal-ov" id="age-modal" role="dialog" aria-modal="true" aria-labelledby="age-h">
+  <div class="modal">
+    <div class="modal-h" id="age-h">年齢確認</div>
+    <div class="modal-b">
+      <p>このフィルタには<strong>成人向け（R-18）</strong>の作品が含まれます。</p>
+      <p>あなたは18歳以上ですか？</p>
+      <div class="modal-acts">
+        <button id="age-yes" class="m-yes">はい（18歳以上）</button>
+        <button id="age-no" class="m-no">いいえ</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer><div class="wrap">
+  <div class="flinks"><a class="js-form-link" href="#" target="_blank" rel="noopener">掲載申請</a><a href="#" id="calc-link">推定売上の算出方法</a><a class="js-contact-link" href="#" target="_blank" rel="noopener">お問合わせ</a></div>
+  <p class="disc">
+    本サイトはIP360補助金の交付決定を受けた作品を掲載対象としません。交付決定者は別途METIの公式チャネルにて発表されます。採択作品の掲載が判明した場合は、随時手動で削除します。<br>
+    本サイトは独立した有志によるパロディであり、経済産業省、IP360事務局、VIPO、その他いかなる政府機関とも一切関係ありません。サイト名・組織名・ロゴはすべて架空のものです。<br>
+    「推定売上」はSteamの公開レビュー数に基づくBoxleiter法による参考推計です。「自己申告」は作者の申告値です。itchは販売データを公開していないため、自己申告の無いitch作品は推定対象外（合計に非計上）です。各ゲームの権利は各権利者に帰属します。
+  </p>
+  <p class="copy">© <span id="yr"></span> 落選IP連合 ・ 当サイトは祈りと自力により運営されています。</p>
+</div></footer>
+
+<script>
+(function(){
+  "use strict";
+  // ▼▼▼ Googleフォームの公開URLをここに（Apps Scriptのログに出る getPublishedUrl） ▼▼▼
+  var FORM_URL = "https://forms.gle/REPLACE_WITH_YOUR_FORM";
+  // ▼ お問合わせ用の別フォームURL（後で手動で差し替え） ▼
+  var CONTACT_URL = "https://forms.gle/REPLACE_WITH_CONTACT_FORM";
+  // ▲▲▲
+  // ▲▲▲
+  var FALLBACK = {
+    generated_at:"（応募受付中）", target_jpy:20000000000000,
+    total_estimated_jpy:0, total_self_reported_jpy:0,
+    total_counter_jpy:0, total_reviews:0,
+    assumptions:{boxleiter_multiplier:30, effective_price_factor:0.6, usd_jpy:155},
+    games:[]
+  };
+
+  var D=null, A={};
+  var filt={ip360:"all",status:"all",ai:"all",adult:"sfw",genres:[]};
+  var adultConfirmed=false;
+  var yen=function(n){return "¥"+Math.round(n).toLocaleString("ja-JP");};
+  var num=function(n){return Math.round(n).toLocaleString("ja-JP");};
+  function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+  function rnd(arr,k){var a=arr.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a.slice(0,k);}
+
+  function revHtml(g){
+    if(g.revenue_kind==="estimated") return '<span class="k">推定売上</span><span class="v est">'+yen(g.revenue_jpy)+'</span>';
+    if(g.revenue_kind==="self_reported") return '<span class="k">自己申告</span><span class="v self">'+yen(g.revenue_jpy)+'</span>';
+    return '<span class="k">売上</span><span class="v exc">対象外（itch非公開）</span>';
+  }
+  function card(g){
+    var c=document.createElement("article");c.className="card";
+    var stamp = g.ip360==="rejected" ? '<div class="stamp" aria-label="不採択">不採択</div>' : '';
+    var pin = g.status==="released" ? '<div class="pin-status rel">発売済</div>' : '<div class="pin-status dev">開発中</div>';
+    var thumb='<div class="thumb">'+(g.header_image?'<img src="'+esc(g.header_image)+'" alt="'+esc(g.name)+'" loading="lazy">':'<div class="ph">画像（Steam自動取得 / 作者提供）</div>')+stamp+pin+'</div>';
+
+    var idline = g.app_id ? ('App ID: '+esc(g.app_id)) : (g.itch_url?'itch.io':'—');
+    var ipnone = g.ip360==="none" ? '<div class="ip-none">IP360：未申請</div>' : '';
+    var genreTags=(g.genre||[]).map(function(t){return '<span class="tag g">'+esc(t)+'</span>';}).join("");
+    var aiTag = g.ai_used===true?'<span class="tag ai">AI使用</span>':(g.ai_used===false?'<span class="tag">AI不使用</span>':'');
+    var r18Tag = g.adult?'<span class="tag r18">R-18</span>':'';
+
+    var ci='<div class="ci"><div class="gname">'+esc(g.name)+'</div>'+
+      '<div class="meta-line">'+idline+'</div>'+ipnone+
+      '<div class="tags">'+r18Tag+aiTag+genreTags+'</div>'+
+      '<div class="rev">'+revHtml(g)+'</div></div>';
+    c.innerHTML=thumb+ci;
+
+    var btn=document.createElement("button");btn.className="acc-btn";btn.setAttribute("aria-expanded","false");
+    btn.innerHTML='<span class="tri">▶</span> 詳細を見る';
+    var L=g.links||{},lb=[];
+    if(L.steam)lb.push('<a href="'+esc(L.steam)+'" target="_blank" rel="noopener">Steam ↗</a>');
+    if(L.itch)lb.push('<a href="'+esc(L.itch)+'" target="_blank" rel="noopener">itch.io ↗</a>');
+    if(L.website)lb.push('<a href="'+esc(L.website)+'" target="_blank" rel="noopener">公式サイト ↗</a>');
+    var sns=L.sns||(L.x?[L.x]:[]);
+    (Array.isArray(sns)?sns:[sns]).forEach(function(u){
+      if(!u)return;
+      var label="SNS";try{label=new URL(u).hostname.replace(/^www\./,"");}catch(e){}
+      lb.push('<a href="'+esc(u)+'" target="_blank" rel="noopener">'+esc(label)+' ↗</a>');
+    });
+    var linksHtml=lb.length?'<div class="links">'+lb.join("")+'</div>':'<p class="calc">リンク未登録</p>';
+
+    var calc;
+    if(g.revenue_kind==="estimated") calc='レビュー '+num(g.total_reviews)+' 件 × 係数 '+(A.boxleiter_multiplier||30)+' ＝ 推定 '+num(g.est_units)+' 本 × 実効単価係数 '+(A.effective_price_factor||0.6)+' → '+yen(g.revenue_jpy);
+    else if(g.revenue_kind==="self_reported") calc='作者の自己申告値：'+yen(g.revenue_jpy)+'（itchは販売データ非公開のため申告制）';
+    else calc='itchは販売データを公開していないため、推定対象外（合計に非計上）。';
+
+    var stmt = (g.ip360==="rejected"&&g.statement)?'<div class="blk"><h4>落選感言</h4><p class="statement">'+esc(g.statement)+'</p></div>':'';
+    var bd=document.createElement("div");bd.className="acc-bd";
+    bd.innerHTML='<div class="blk"><h4>概要</h4><p style="margin:0">'+esc(g.short_description||"—")+'</p></div>'+
+      stmt+'<div class="blk"><h4>関連リンク</h4>'+linksHtml+'</div>'+
+      '<div class="blk" style="margin-bottom:0"><h4>売上の内訳</h4><p class="calc">'+calc+'</p></div>';
+    btn.addEventListener("click",function(){var o=bd.classList.toggle("open");btn.setAttribute("aria-expanded",o?"true":"false");});
+    c.appendChild(btn);c.appendChild(bd);
+    return c;
+  }
+
+  function phCard(){
+    var d=document.createElement("div");d.className="ph-card";
+    d.innerHTML='<div>あなたの作品が<br>ここに掲載されます</div><a class="cta" href="'+FORM_URL+'" target="_blank" rel="noopener" style="font-size:11px;padding:5px 12px">応募する →</a>';
+    return d;
+  }
+  function renderShowcase(){
+    var sfw=D.games.filter(function(g){return !g.adult;});
+    var rel=sfw.filter(function(g){return g.status==="released";});
+    var dev=sfw.filter(function(g){return g.status==="in_development";});
+    document.getElementById("rel-cnt").textContent="全"+rel.length+"件";
+    document.getElementById("dev-cnt").textContent="全"+dev.length+"件";
+    var R=document.getElementById("show-rel"),V=document.getElementById("show-dev");
+    R.innerHTML="";V.innerHTML="";
+    if(rel.length){ rnd(rel,3).forEach(function(g){R.appendChild(card(g));}); }
+    else { R.appendChild(phCard());R.appendChild(phCard()); }
+    if(dev.length){ rnd(dev,3).forEach(function(g){V.appendChild(card(g));}); }
+    else { V.appendChild(phCard());V.appendChild(phCard()); }
+  }
+
+  function renderChips(){
+    var set={};D.games.forEach(function(g){(g.genre||[]).forEach(function(t){set[t]=(set[t]||0)+1;});});
+    var keys=Object.keys(set).sort(function(a,b){return set[b]-set[a];});
+    var box=document.getElementById("gchips");box.innerHTML="";
+    keys.forEach(function(t){
+      var b=document.createElement("button");b.className="gchip";b.type="button";b.setAttribute("aria-pressed","false");
+      b.textContent=t+"("+set[t]+")";b.dataset.v=t;
+      b.addEventListener("click",function(){
+        var i=filt.genres.indexOf(t);
+        if(i>=0){filt.genres.splice(i,1);b.setAttribute("aria-pressed","false");}
+        else{filt.genres.push(t);b.setAttribute("aria-pressed","true");}
+        renderList();
+      });
+      box.appendChild(b);
+    });
+  }
+
+  function renderList(){
+    var g=document.getElementById("list-grid");g.innerHTML="";
+    if(!D.games.length){
+      document.getElementById("list-count").textContent=0;
+      document.getElementById("list-empty").classList.add("hide");
+      g.innerHTML='<div class="prelaunch">現在、<strong>応募受付中</strong>です。第一弾の掲載作品は <strong>2026年7月31日</strong> に公開予定。<br>あなたの作品の掲載申請をお待ちしています。<br><br><a class="cta" href="'+FORM_URL+'" target="_blank" rel="noopener">→ 掲載申請フォームへ</a></div>';
+      return;
+    }
+    var rows=D.games.filter(function(x){
+      if(filt.adult!=="all"&&x.adult)return false;
+      if(filt.ip360!=="all"&&x.ip360!==filt.ip360)return false;
+      if(filt.status!=="all"&&x.status!==filt.status)return false;
+      if(filt.ai==="yes"&&x.ai_used!==true)return false;
+      if(filt.ai==="no"&&x.ai_used!==false)return false;
+      if(filt.genres.length){var has=(x.genre||[]).some(function(t){return filt.genres.indexOf(t)>=0;});if(!has)return false;}
+      return true;
+    });
+    document.getElementById("list-count").textContent=rows.length;
+    document.getElementById("list-empty").classList.toggle("hide",rows.length>0);
+    rows.forEach(function(x){g.appendChild(card(x));});
+  }
+
+  // ▼ 企画スケジュール（7/31公開後はこのpanelごと削除可） ▼
+  var CAMPAIGN_START = new Date("2026-07-01T00:00:00+09:00");
+  var FIRST_BATCH    = new Date("2026-07-31T23:59:59+09:00");
+  function renderCampaign(){
+    var now=new Date(), span=FIRST_BATCH-CAMPAIGN_START;
+    var p=span>0?((now-CAMPAIGN_START)/span*100):100;
+    p=Math.min(Math.max(p,0),100);
+    var days=Math.ceil((FIRST_BATCH-now)/86400000);
+    var cd=document.getElementById("camp-countdown"), cs=document.getElementById("camp-start"), cb=document.getElementById("camp-bar");
+    if(cs) cs.textContent="応募開始 "+(CAMPAIGN_START.getMonth()+1)+"/"+CAMPAIGN_START.getDate();
+    if(cd) cd.textContent = days>0 ? ("第一弾公開まで あと "+days+" 日") : "第一弾 公開済み";
+    if(cb) setTimeout(function(){cb.style.width=Math.max(p,2)+"%";},120);
+  }
+
+  function render(d){
+    D=d;A=d.assumptions||{};
+    document.getElementById("total-jpy").textContent=yen(d.total_counter_jpy||0);
+    document.getElementById("target-jpy").textContent="/ "+yen(d.target_jpy||20000000000000);
+    var pct=(d.total_counter_jpy||0)/(d.target_jpy||20000000000000)*100;
+    document.getElementById("pct").textContent="進捗 "+(pct>=1?pct.toFixed(2):pct.toFixed(4))+"%";
+    setTimeout(function(){document.getElementById("bar").style.width=Math.min(Math.max(pct,0.04),100)+"%";},120);
+    document.getElementById("m-count").textContent=num(d.games.length);
+    document.getElementById("m-est").textContent=yen(d.total_estimated_jpy||0);
+    document.getElementById("m-self").textContent=yen(d.total_self_reported_jpy||0);
+    document.getElementById("m-updated").textContent=d.generated_at||"—";
+    document.getElementById("yr").textContent=new Date().getFullYear();
+    renderCampaign();renderShowcase();renderChips();renderList();
+  }
+
+  // tabs
+  function showTab(which){
+    var top=which==="top";
+    document.getElementById("tab-top").setAttribute("aria-selected",top?"true":"false");
+    document.getElementById("tab-list").setAttribute("aria-selected",top?"false":"true");
+    document.getElementById("view-top").classList.toggle("hide",!top);
+    document.getElementById("view-list").classList.toggle("hide",top);
+  }
+  document.getElementById("tab-top").onclick=function(){showTab("top");};
+  document.getElementById("tab-list").onclick=function(){showTab("list");};
+
+  // segmented filters
+  function setSeg(seg,b){
+    seg.querySelectorAll("button").forEach(function(x){x.setAttribute("aria-pressed","false");});
+    b.setAttribute("aria-pressed","true");filt[seg.dataset.filter]=b.dataset.v;renderList();
+  }
+  document.querySelectorAll(".seg").forEach(function(seg){
+    var key=seg.dataset.filter;
+    seg.querySelectorAll("button").forEach(function(b){
+      b.addEventListener("click",function(){
+        // 成人向け表示は18歳以上の確認が必要
+        if(key==="adult" && b.dataset.v==="all" && !adultConfirmed){
+          pendingAdultSeg={seg:seg,btn:b};
+          document.getElementById("age-modal").classList.add("show");
+          return;
+        }
+        setSeg(seg,b);
+      });
+    });
+  });
+
+  // 年齢確認モーダル
+  var pendingAdultSeg=null;
+  document.getElementById("age-yes").onclick=function(){
+    adultConfirmed=true;
+    document.getElementById("age-modal").classList.remove("show");
+    if(pendingAdultSeg){setSeg(pendingAdultSeg.seg,pendingAdultSeg.btn);pendingAdultSeg=null;}
+  };
+  document.getElementById("age-no").onclick=function(){
+    document.getElementById("age-modal").classList.remove("show");
+    pendingAdultSeg=null; // 「全年齢のみ」のまま
+  };
+  document.getElementById("age-modal").addEventListener("click",function(e){
+    if(e.target===this){this.classList.remove("show");pendingAdultSeg=null;}
+  });
+
+  document.getElementById("reshuf").onclick=function(){renderShowcase();};
+  var n=document.getElementById("sz-n"),l=document.getElementById("sz-l");
+  n.onclick=function(){document.body.classList.remove("lg");n.setAttribute("aria-pressed","true");l.setAttribute("aria-pressed","false");};
+  l.onclick=function(){document.body.classList.add("lg");l.setAttribute("aria-pressed","true");n.setAttribute("aria-pressed","false");};
+  document.getElementById("calc-link").addEventListener("click",function(e){e.preventDefault();
+    alert("推定売上の算出方法（Boxleiter法）\n\n推定本数＝Steam公開レビュー数×係数（既定30）\n推定売上＝推定本数×定価×実効単価係数（既定0.6）\n\nitchは販売データ非公開のため、自己申告が無ければ対象外。誤差は大きく、眺めて楽しむための参考値です。");
+  });
+
+  fetch("./data.json",{cache:"no-store"}).then(function(r){if(!r.ok)throw 0;return r.json();})
+    .then(render).catch(function(){render(FALLBACK);});
+
+  document.querySelectorAll(".js-form-link").forEach(function(a){a.href=FORM_URL;});
+  document.querySelectorAll(".js-contact-link").forEach(function(a){a.href=CONTACT_URL;});
+})();
+</script>
+</body>
+</html>
