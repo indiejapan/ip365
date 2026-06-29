@@ -24,9 +24,6 @@
   .util{background:var(--navy-d);color:#dfe6f0;font-size:12px}
   .util .wrap{display:flex;justify-content:flex-end;align-items:center;gap:16px;height:34px}
   .util a{color:#dfe6f0;text-decoration:none}.util a:hover{text-decoration:underline}
-  .util .sz{display:flex;gap:6px;align-items:center}
-  .util .sz button{background:none;border:1px solid #3a557d;color:#dfe6f0;font:inherit;font-size:11px;padding:1px 7px;cursor:pointer}
-  .util .sz button[aria-pressed="true"]{background:#dfe6f0;color:var(--navy-d)}
 
   .mast{border-bottom:3px solid var(--navy)}
   .mast .wrap{display:flex;align-items:center;gap:14px;padding:14px 16px}
@@ -98,6 +95,10 @@
   .card{border:1px solid var(--line);background:#fff;display:flex;flex-direction:column}
   .thumb{aspect-ratio:460/215;background:var(--panel-2);position:relative;overflow:hidden;border-bottom:1px solid var(--line-s)}
   .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+  .thumb a.thumb-link{position:absolute;inset:0;display:block;cursor:pointer}
+  .thumb a.thumb-link::after{content:"↗";position:absolute;bottom:6px;right:8px;font-size:13px;font-weight:700;color:#fff;background:rgba(14,41,73,.72);width:22px;height:22px;line-height:22px;text-align:center;border-radius:2px;opacity:0;transition:opacity .15s}
+  .thumb a.thumb-link:hover::after{opacity:1}
+  .thumb a.thumb-link:hover img{opacity:.9}
   .thumb .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#9aa6b4;font-size:11px;text-align:center;padding:10px}
   .stamp{position:absolute;top:8px;left:8px;border:2.5px solid var(--stamp);color:var(--stamp);font-size:12px;font-weight:700;letter-spacing:3px;padding:2px 6px 2px 9px;transform:rotate(-9deg);background:rgba(255,255,255,.55)}
   .pin-status{position:absolute;top:8px;right:8px;font-size:10px;font-weight:700;padding:2px 8px;background:rgba(255,255,255,.85)}
@@ -105,7 +106,8 @@
   .ci{padding:11px 13px;display:flex;flex-direction:column;gap:7px;flex:1}
   .gname{font-size:15px;font-weight:700;line-height:1.35}
   .meta-line{font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
-  .ip-none{font-size:11px;color:#aaa}
+  .meta-line a.src-link{color:var(--navy);text-decoration:none}
+  .meta-line a.src-link:hover{text-decoration:underline}
   .tags{display:flex;flex-wrap:wrap;gap:5px}
   .tag{font-size:10.5px;padding:2px 8px;border:1px solid var(--line);color:var(--sub);background:var(--panel);white-space:nowrap}
   .tag.g{background:var(--panel-2);color:var(--navy-d);border-color:#cdd8e6}
@@ -152,16 +154,11 @@
     .pmeta{grid-template-columns:1fr 1fr}
   }
   @media(prefers-reduced-motion:reduce){*{transition:none!important}}
-  body.lg{font-size:17px}
 </style>
 </head>
 <body>
 
 <div class="util"><div class="wrap">
-  <span class="sz">文字サイズ
-    <button id="sz-n" aria-pressed="true">標準</button>
-    <button id="sz-l" aria-pressed="false">拡大</button>
-  </span>
   <a href="#">サイトマップ</a>
 </div></div>
 
@@ -330,22 +327,29 @@
   function revHtml(g){
     if(g.revenue_kind==="estimated") return '<span class="k">推定売上</span><span class="v est">'+yen(g.revenue_jpy)+'</span>';
     if(g.revenue_kind==="self_reported") return '<span class="k">自己申告</span><span class="v self">'+yen(g.revenue_jpy)+'</span>';
-    return '<span class="k">売上</span><span class="v exc">対象外（itch非公開）</span>';
+    return '<span class="k">売上</span><span class="v exc">対象外</span>';
   }
   function card(g){
     var c=document.createElement("article");c.className="card";
     var stamp = g.ip360==="rejected" ? '<div class="stamp" aria-label="不採択">不採択</div>' : '';
     var pin = g.status==="released" ? '<div class="pin-status rel">発売済</div>' : '<div class="pin-status dev">開発中</div>';
-    var thumb='<div class="thumb">'+(g.header_image?'<img src="'+esc(g.header_image)+'" alt="'+esc(g.name)+'" loading="lazy">':'<div class="ph">画像（Steam自動取得 / 作者提供）</div>')+stamp+pin+'</div>';
+    var thumbInner=(g.header_image?'<img src="'+esc(g.header_image)+'" alt="'+esc(g.name)+'" loading="lazy">':'<div class="ph">画像（Steam自動取得 / 作者提供）</div>')+stamp+pin;
+    var thumbUrl=(g.links&&(g.links.steam||g.links.itch))||g.itch_url||(g.links&&g.links.website)||'';
+    var thumb=thumbUrl
+      ? '<div class="thumb"><a class="thumb-link" href="'+esc(thumbUrl)+'" target="_blank" rel="noopener" aria-label="'+esc(g.name)+' のページを開く">'+thumbInner+'</a></div>'
+      : '<div class="thumb">'+thumbInner+'</div>';
 
-    var idline = g.app_id ? ('App ID: '+esc(g.app_id)) : (g.itch_url?'itch.io':'—');
-    var ipnone = g.ip360==="none" ? '<div class="ip-none">IP360：未申請</div>' : '';
+    var srcUrl = g.app_id ? (g.links&&g.links.steam) : ((g.links&&g.links.itch)||g.itch_url);
+    var srcLabel = g.app_id ? ('App ID: '+esc(g.app_id)) : 'itch.io';
+    var idline = (g.app_id||g.itch_url)
+      ? (srcUrl ? '<a class="src-link" href="'+esc(srcUrl)+'" target="_blank" rel="noopener">'+srcLabel+' ↗</a>' : srcLabel)
+      : '—';
     var genreTags=(g.genre||[]).map(function(t){return '<span class="tag g">'+esc(t)+'</span>';}).join("");
     var aiTag = g.ai_used===true?'<span class="tag ai">生成AI使用</span>':(g.ai_used===false?'<span class="tag">生成AI不使用</span>':'');
     var r18Tag = g.adult?'<span class="tag r18">R-18</span>':'';
 
     var ci='<div class="ci"><div class="gname">'+esc(g.name)+'</div>'+
-      '<div class="meta-line">'+idline+'</div>'+ipnone+
+      '<div class="meta-line">'+idline+'</div>'+
       '<div class="tags">'+r18Tag+aiTag+genreTags+'</div>'+
       '<div class="rev">'+revHtml(g)+'</div></div>';
     c.innerHTML=thumb+ci;
@@ -367,7 +371,9 @@
     var calc;
     if(g.revenue_kind==="estimated") calc='レビュー '+num(g.total_reviews)+' 件 × 係数 '+(A.boxleiter_multiplier||30)+' ＝ 推定 '+num(g.est_units)+' 本 × 実効単価係数 '+(A.effective_price_factor||0.6)+' → '+yen(g.revenue_jpy);
     else if(g.revenue_kind==="self_reported") calc='作者の自己申告値：'+yen(g.revenue_jpy)+'（itchは販売データ非公開のため申告制）';
-    else calc='itchは販売データを公開していないため、推定対象外（合計に非計上）。';
+    else calc = g.app_id
+      ? 'まだ発売前、またはレビューが無いため売上を推定できません（合計には非計上）。'
+      : 'itchは販売データを公開していないため、推定対象外（合計には非計上）。';
 
     var stmt = (g.ip360==="rejected"&&g.statement)?'<div class="blk"><h4>落選感言</h4><p class="statement">'+esc(g.statement)+'</p></div>':'';
     var bd=document.createElement("div");bd.className="acc-bd";
@@ -513,9 +519,6 @@
   });
 
   document.getElementById("reshuf").onclick=function(){renderShowcase();};
-  var n=document.getElementById("sz-n"),l=document.getElementById("sz-l");
-  n.onclick=function(){document.body.classList.remove("lg");n.setAttribute("aria-pressed","true");l.setAttribute("aria-pressed","false");};
-  l.onclick=function(){document.body.classList.add("lg");l.setAttribute("aria-pressed","true");n.setAttribute("aria-pressed","false");};
   document.getElementById("calc-link").addEventListener("click",function(e){e.preventDefault();
     alert("推定売上の算出方法（Boxleiter法）\n\n推定本数＝Steam公開レビュー数×係数（既定30）\n推定売上＝推定本数×定価×実効単価係数（既定0.6）\n\nitchは販売データ非公開のため、自己申告が無ければ対象外。誤差は大きく、眺めて楽しむための参考値です。");
   });
