@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>日本インディーゲーム振興企画｜落選IP連合</title>
+<title>日本インディーゲーム振興企画｜IP365</title>
 <meta name="description" content="日本のインディーゲームを収録・宣伝する非公式ファンサイト。IP360補助金に不採択となった作品も対象。">
 <style>
   :root{
@@ -65,6 +65,13 @@
   .ph-card a{font-size:12px}
   .prelaunch{border:1px solid var(--line);background:var(--panel);padding:24px 20px;text-align:center;font-size:14px;color:var(--sub)}
   .prelaunch strong{color:var(--navy-d)}
+  .faq-title{font-size:20px;font-weight:700;color:var(--ink);margin:4px 0 4px;padding-bottom:8px;border-bottom:2px solid var(--navy)}
+  .faq-lead{font-size:13px;color:var(--sub);margin:0 0 20px}
+  .qa{border:1px solid var(--line-s);border-left:4px solid var(--navy);background:var(--panel);padding:14px 16px;margin:0 0 14px}
+  .qa .q{font-size:15px;font-weight:700;color:var(--navy-d);margin:0 0 8px}
+  .qa .a{font-size:13.5px;line-height:1.85;color:#2b2b2b}
+  .qa .a strong{color:var(--navy-d)}
+  .faq-cta{margin:22px 0 4px;text-align:center}
   .tag.r18{border-color:#d88;color:#fff;background:var(--stamp);font-weight:700}
   .modal-ov{position:fixed;inset:0;background:rgba(14,41,73,.55);display:none;align-items:center;justify-content:center;z-index:50;padding:18px}
   .modal-ov.show{display:flex}
@@ -180,6 +187,7 @@
 <div class="tabs"><div class="wrap" role="tablist">
   <button class="tab" id="tab-top" role="tab" aria-selected="true" aria-controls="view-top">トップ</button>
   <button class="tab" id="tab-list" role="tab" aria-selected="false" aria-controls="view-list">全作品リスト</button>
+  <button class="tab" id="tab-faq" role="tab" aria-selected="false" aria-controls="view-faq">よくある質問</button>
 </div></div>
 
 <main><div class="wrap">
@@ -273,6 +281,47 @@
     </section>
   </section>
 
+  <section id="view-faq" role="tabpanel" aria-labelledby="tab-faq" class="hide">
+    <h2 class="faq-title">よくある質問</h2>
+    <p class="faq-lead">この企画について、よく寄せられる質問をまとめました。</p>
+
+    <div class="qa">
+      <div class="q">Q. この企画（IP365）は何のためのものですか？</div>
+      <div class="a">
+        IP360補助金に採択された作品は、大きな注目と露出のチャンスを得ます。けれど、落選した作品だって、同じように何枚もの資料を用意して挑んだはず。それなのに、ハードディスクの片隅に埋もれ、誰の目にも触れないまま終わってしまう——というのは、あまりにもったいない。<br>
+        IP365は、IP360に集まる注目を少しだけ借りて、そうした作品を一緒に並べる場所です。落ちても、作らなかったわけじゃない。インディー開発者の努力を、もっと多くの人に見てもらうために。
+      </div>
+    </div>
+
+    <div class="qa">
+      <div class="q">Q. 応募にお金はかかりますか？収益はありますか？</div>
+      <div class="a">
+        応募は<strong>完全に無料</strong>です。そして正直に言うと、このサイトに掲載されても直接お金が入るわけではありません。<br>
+        ただ、露出の窓口がひとつ増えれば、プレイヤーや目利き、メディアの誰かが作品を見つけてくれるかもしれない。その出会いが、いつかの売上につながる——そんな「きっかけ」になれたら、と考えています。
+      </div>
+    </div>
+
+    <div class="qa">
+      <div class="q">Q. 応募は大変ですか？何を用意すればいいですか？</div>
+      <div class="a">
+        Steam の App ID、または itch などの紹介ページURLと、ゲームの短い概要。用意するのはそれだけです。早ければ<strong>30秒</strong>、長くても3分ほどで終わります。<br>
+        IP360のような分厚い書類仕事は一切ありません。しかも<strong>採択率は100%</strong>。落選の心配は、もうしなくて大丈夫です。
+      </div>
+    </div>
+
+    <div class="qa">
+      <div class="q">Q. 広告や寄付は？どうやって運営しているのですか？</div>
+      <div class="a">
+        この企画は、できるだけ<strong>非商業的なまま</strong>続けたいと考えています。そのため独立ドメインを持たず、GitHub Pages に間借りする形で公開しています。おかげで運営コストはほぼゼロ。<br>
+        広告は載せませんし、寄付やスポンサーも募りません。細く長く、年中無休で。
+      </div>
+    </div>
+
+    <p class="faq-cta">
+      <a class="cta js-form-link" href="#" target="_blank" rel="noopener">→ 掲載申請フォームへ</a>
+    </p>
+  </section>
+
 </div></main>
 
 <div class="modal-ov" id="age-modal" role="dialog" aria-modal="true" aria-labelledby="age-h">
@@ -340,7 +389,7 @@
       : '<div class="thumb">'+thumbInner+'</div>';
 
     var srcUrl = g.app_id ? (g.links&&g.links.steam) : ((g.links&&g.links.itch)||g.itch_url);
-    var srcLabel = g.app_id ? ('App ID: '+esc(g.app_id)) : 'itch.io';
+    var srcLabel = g.app_id ? ('Steam｜App ID: '+esc(g.app_id)) : 'itch.io';
     var idline = (g.app_id||g.itch_url)
       ? (srcUrl ? '<a class="src-link" href="'+esc(srcUrl)+'" target="_blank" rel="noopener">'+srcLabel+' ↗</a>' : srcLabel)
       : '—';
@@ -444,15 +493,18 @@
   }
 
   // ▼ 企画スケジュール（7/31公開後はこのpanelごと削除可） ▼
-  var CAMPAIGN_START = new Date("2026-07-01T00:00:00+09:00");
-  var FIRST_BATCH    = new Date("2026-07-31T23:59:59+09:00");
+  var CAMPAIGN_START_ISO = "2026-07-01";
+  var FIRST_BATCH_ISO    = "2026-07-31";
+  var CAMPAIGN_START = new Date(CAMPAIGN_START_ISO+"T00:00:00+09:00");
+  var FIRST_BATCH    = new Date(FIRST_BATCH_ISO+"T23:59:59+09:00");
+  function mdLabel(iso){ var p=iso.split("-"); return (+p[1])+"/"+(+p[2]); }
   function renderCampaign(){
     var now=new Date(), span=FIRST_BATCH-CAMPAIGN_START;
     var p=span>0?((now-CAMPAIGN_START)/span*100):100;
     p=Math.min(Math.max(p,0),100);
     var days=Math.ceil((FIRST_BATCH-now)/86400000);
     var cd=document.getElementById("camp-countdown"), cs=document.getElementById("camp-start"), cb=document.getElementById("camp-bar");
-    if(cs) cs.textContent="応募開始 "+(CAMPAIGN_START.getMonth()+1)+"/"+CAMPAIGN_START.getDate();
+    if(cs) cs.textContent="応募開始 "+mdLabel(CAMPAIGN_START_ISO);
     if(cd) cd.textContent = days>0 ? ("第一弾公開まで あと "+days+" 日") : "第一弾 公開済み";
     if(cb) setTimeout(function(){cb.style.width=Math.max(p,2)+"%";},120);
   }
@@ -473,15 +525,16 @@
   }
 
   // tabs
+  var TABS=["top","list","faq"];
   function showTab(which){
-    var top=which==="top";
-    document.getElementById("tab-top").setAttribute("aria-selected",top?"true":"false");
-    document.getElementById("tab-list").setAttribute("aria-selected",top?"false":"true");
-    document.getElementById("view-top").classList.toggle("hide",!top);
-    document.getElementById("view-list").classList.toggle("hide",top);
+    TABS.forEach(function(t){
+      document.getElementById("tab-"+t).setAttribute("aria-selected", t===which?"true":"false");
+      document.getElementById("view-"+t).classList.toggle("hide", t!==which);
+    });
   }
-  document.getElementById("tab-top").onclick=function(){showTab("top");};
-  document.getElementById("tab-list").onclick=function(){showTab("list");};
+  TABS.forEach(function(t){
+    document.getElementById("tab-"+t).onclick=function(){showTab(t);};
+  });
 
   // segmented filters
   function setSeg(seg,b){
